@@ -3,4 +3,4 @@ pandas
 mysql-connector-python
 plotly
 openpyxl
-fpdf
+reportlab
