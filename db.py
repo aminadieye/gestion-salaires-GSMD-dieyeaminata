@@ -8,7 +8,7 @@ Created on Sat Jul  5 01:19:43 2025
 import mysql.connector
 
 def get_connection():
-    # Connexion à la base de données gratuite AIVEN sur internet
+    # Connexion à la base de données AIVEN sur internet
     return mysql.connector.connect(
         host="mysql-30ebd1da-aminatadieye748-8208.g.aivencloud.com",
         user="avnadmin",
@@ -21,17 +21,17 @@ def create_tables():
     conn = get_connection()
     cur = conn.cursor()
 
+    # On efface toutes les anciennes tables de test
     cur.execute('DROP TABLE IF EXISTS paiements')
     cur.execute('DROP TABLE IF EXISTS avances')
     cur.execute('DROP TABLE IF EXISTS employes')
 
-    # 1. Table des employés
+    # 1. Table des employés (Propre : on a retiré est_fonctionnaire)
     cur.execute('''
     CREATE TABLE IF NOT EXISTS employes (
         id INTEGER PRIMARY KEY AUTO_INCREMENT,
         nom VARCHAR(255) NOT NULL,
         poste VARCHAR(100) NOT NULL,
-        est_fonctionnaire BOOLEAN DEFAULT FALSE,
         salaire_base REAL DEFAULT 0,
         prix_heure FLOAT DEFAULT 0
     )
@@ -71,4 +71,4 @@ def create_tables():
 
 if __name__ == "__main__":
     create_tables()
-    print("Tables créées avec succès sur la base de données EN LIGNE (Aiven) !")
+    print("Base de données nettoyée et recréée avec succès !")
